@@ -35,7 +35,7 @@ app.get('/api/persons', (req, res) => {
 app.get('/info', (req, res) => {
   const reqTime = new Date()
   res.send(`<p>Phonebook has info for ${persons.length} people</p>
-    <p>${reqTime}</p>`)
+    <p>${reqTime.toString()}</p>`)
 })
 
 const PORT = 3001
