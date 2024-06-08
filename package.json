@@ -1,0 +1,19 @@
+{
+  "name": "fullstack_course_p3",
+  "version": "1.0.0",
+  "description": "exercises for course fullstack",
+  "main": "index.js",
+  "scripts": {
+	"start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "full_stack_p3"
+  },
+  "author": "Fabrizio Mirabella",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^3.1.3"
+  }
+}
