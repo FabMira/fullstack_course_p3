@@ -44,6 +44,13 @@ app.get('/api/persons/:id', (req, res) => {
   person ? res.json(person) : res.status(400).send(`id: '${id}' does not exist in phonebook`) 
 })
 
+app.delete('/api/persons/:id', (req, res) => {
+  const id = Number(req.params.id)
+  persons = persons.filter(person => person.id !== id)
+
+  res.status(204).end()
+})
+
 const PORT = 3001
 app.listen(PORT, () => {
     console.log(`is ${PORT}`)
