@@ -38,6 +38,12 @@ app.get('/info', (req, res) => {
     <p>${reqTime.toString()}</p>`)
 })
 
+app.get('/api/persons/:id', (req, res) => {
+  const id = Number(req.params.id)
+  const person = persons.find(person => person.id === id)
+  person ? res.json(person) : res.status(400).send(`id: '${id}' does not exist in phonebook`) 
+})
+
 const PORT = 3001
 app.listen(PORT, () => {
     console.log(`is ${PORT}`)
