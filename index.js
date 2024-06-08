@@ -61,7 +61,8 @@ app.delete('/api/persons/:id', (req, res) => {
 
 app.post('/api/persons', (req, res) => {
   const body = req.body
-
+  const names = persons.map(person => person.name)
+  
   if (!body.name) {
     return res.status(400).json({
       error: 'name missing'
@@ -69,6 +70,10 @@ app.post('/api/persons', (req, res) => {
   } else if (!body.number) {
     return res.status(400).json({
       error: 'number missing'
+    })
+  } else if (names.includes(body.name)) {
+    return res.status(400).json({
+      error: 'name must be unique'
     })
   }
 
