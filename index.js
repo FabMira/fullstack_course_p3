@@ -1,6 +1,9 @@
 const express = require('express')
+const morgan = require('morgan')
 const app = express()
+
 app.use(express.json())
+app.use(morgan('tiny'))
 
 let persons = [
     { 
@@ -33,7 +36,7 @@ const generateId = () => {
 }
 
 app.get('/', (req, res) => {
-    res.send('<h1>hello world</h1>')
+    res.send('<h1>Phonebook backend</h1>')
 })
 
 app.get('/api/persons', (req, res) => {
@@ -62,7 +65,7 @@ app.delete('/api/persons/:id', (req, res) => {
 app.post('/api/persons', (req, res) => {
   const body = req.body
   const names = persons.map(person => person.name)
-  
+
   if (!body.name) {
     return res.status(400).json({
       error: 'name missing'
@@ -91,5 +94,5 @@ app.post('/api/persons', (req, res) => {
 
 const PORT = 3001
 app.listen(PORT, () => {
-    console.log(`is ${PORT}`)
+    console.log(`Server is running on http://localhost:${PORT}`)
 })
