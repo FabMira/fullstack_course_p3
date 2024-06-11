@@ -36,3 +36,8 @@
 ehthumbs.db
 Thumbs.db
 
+# Files to ignore #
+##################
+node_modules
+.env
+
