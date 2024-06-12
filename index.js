@@ -15,6 +15,7 @@ app.use(morgan(':method :url :status :res[content-length] :response-time ms :req
 app.use(cors())
 app.use(express.static('dist'))
 app.use(express.json())
+//app.use(express.logger())
 
 let persons = []
 
@@ -35,7 +36,7 @@ app.get('/info', (req, res) => {
     <p>${reqTime.toString()}</p>`)
 })
 
-app.get('/api/persons/:id', (req, res) => {
+app.get('/api/persons/:id', (req, res, next) => {
   const id = req.params.id
   Person.findById(id)
   .then(person => {
@@ -48,7 +49,7 @@ app.get('/api/persons/:id', (req, res) => {
   .catch(error => next(error))
 })
 
-app.delete('/api/persons/:id', (req, res) => {
+app.delete('/api/persons/:id', (req, res, next) => {
   const id = req.params.id
   Person.findByIdAndDelete(id)
     .then(result => {
@@ -98,3 +99,22 @@ const PORT = process.env.PORT
 app.listen(PORT, () => {
     console.log(`Server is running on ${PORT}`)
 })
+
+const unknownEndpoint = (req, res) => {
+  res.status(404).send({error: 'uknown endpoint'})
+}
+
+//controlador de solicitudes con endpoint desconocido
+app.use(unknownEndpoint)
+
+const errorHandler = (error, req, res, next) => {
+  console.log(error.message)
+
+  if (error.name === 'CastError') {
+    return res.status(400).send({error: 'malformatted id'})
+  }
+  next(error)
+}
+
+//este debe ser el ultimo middleware cargado, ¡tambien todas las rutas deben ser registradas antes que esto!
+app.use(errorHandler)
