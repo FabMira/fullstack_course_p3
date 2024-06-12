@@ -1,4 +1,4 @@
-DELETE http://localhost:3001/api/persons/2
+DELETE http://localhost:3001/api/persons/6669d23ae67dd4099597ea00
 
 ###
 
@@ -6,6 +6,10 @@ POST http://localhost:3001/api/persons
 Content-Type: application/json
 
 {
-    "name": "Jenny Poppendieck",
-    "number": "39-23-643211"
+    "name": "Ragnar Lobthdrok",
+    "number": "040-223123"
 }
+
+###
+
+GET http://localhost:3001/api/persons/
