@@ -17,3 +17,13 @@ GET http://localhost:3001/api/persons/
 ###
 
 GET http://localhost:3001/api/persons/2
+
+###
+
+PUT http://localhost:3001/api/persons/
+Content-Type: : application/json
+
+{
+    "name": "Ragnar Lobthdrok",
+    "number": "040-23231212"
+}
