@@ -1,4 +1,4 @@
-DELETE http://localhost:3001/api/persons/66686f7ce5f9ee1c147ccb7
+DELETE http://localhost:3001/api/persons/666a30f744c669a8bb2f0e09
 
 ###
 
@@ -6,8 +6,8 @@ POST http://localhost:3001/api/persons
 Content-Type: application/json
 
 {
-    "name": "Ragnar Lobthdrok",
-    "number": "040-223123"
+    "name": "Rollo olo",
+    "number": "04-00001444"
 }
 
 ###

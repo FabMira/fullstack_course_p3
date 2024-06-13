@@ -66,6 +66,9 @@ app.post('/api/persons', (req, res, next) => {
     name: body.name,
     number: body.number
   })
+  /*let err
+  err = person.validateSync()*/
+
 
   person.save()
     .then(savedPerson => {
