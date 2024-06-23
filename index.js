@@ -15,19 +15,17 @@ app.use(morgan(':method :url :status :res[content-length] :response-time ms :req
 app.use(cors())
 app.use(express.static('dist'))
 app.use(express.json())
-//app.use(express.logger())
-
 let persons = []
 
 app.get('/', (req, res) => {
-    res.send('<h1>Phonebook backend</h1>')
+  res.send('<h1>Phonebook backend</h1>')
 })
 
 app.get('/api/persons', (req, res) => {
-    Person.find({}).then(person => {
-      res.json(person)
-      persons = (JSON.parse(JSON.stringify(person)))
-    })
+  Person.find({}).then(person => {
+    res.json(person)
+    persons = (JSON.parse(JSON.stringify(person)))
+  })
 })
 
 app.get('/info', (req, res) => {
@@ -39,14 +37,14 @@ app.get('/info', (req, res) => {
 app.get('/api/persons/:id', (req, res, next) => {
   const id = req.params.id
   Person.findById(id)
-  .then(person => {
-    if(person) {
-      res.json(person)
-    } else {
-      res.status(404).end()
-    }
-  })
-  .catch(error => next(error))
+    .then(person => {
+      if(person) {
+        res.json(person)
+      } else {
+        res.status(404).end()
+      }
+    })
+    .catch(error => next(error))
 })
 
 app.delete('/api/persons/:id', (req, res, next) => {
@@ -54,7 +52,7 @@ app.delete('/api/persons/:id', (req, res, next) => {
   Person.findByIdAndDelete(id)
     .then(result => {
       res.json(result)
-      persons = persons.filter(person => person.name != result.name)
+      persons = persons.filter(person => person.name !== result.name)
     })
     .catch(error => next(error))
 })
@@ -86,15 +84,15 @@ app.put('/api/persons/:id', (req, res, next) => {
   }
 
   Person.findByIdAndUpdate(req.params.id, person, {new: true})
-  .then(updatedPerson => {
-    res.json(updatedPerson)
-  })
-  .catch(error => next(error))
+    .then(updatedPerson => {
+      res.json(updatedPerson)
+    })
+    .catch(error => next(error))
 })
 
 const PORT = process.env.PORT
 app.listen(PORT, () => {
-    console.log(`Server is running on ${PORT}`)
+  console.log(`Server is running on ${PORT}`)
 })
 
 const unknownEndpoint = (req, res) => {
